@@ -83,7 +83,7 @@ You can download object mesh from [DexFunPreGrasp/assets](https://drive.google.c
 assets
 ```
 ### Functional Grasp Pose Dataset
-You can download filterd grasping dataset, human trajectories, and pointcloud buffer from [DexFunPreGrasp/datasets](https://drive.google.com/drive/folders/1gKqdrIu9GEYuV4FdRFeFCroRQ9OxL5MI?usp=sharing), put on following directory and extract.
+You can download filterd grasping dataset, human trajectories, and pointcloud buffer from [DexFunPreGrasp/pose_datasets](https://drive.google.com/drive/folders/1gKqdrIu9GEYuV4FdRFeFCroRQ9OxL5MI?usp=sharing), put on following directory and extract.
 ```
 data
 ```
@@ -108,12 +108,19 @@ sh ./collect_expert_demonstration.sh
 
 **Create Expert Dataset**
 
-We then create the expert dataset using the generated data by running the following shell. We provide the **generated dataset** on [DexFunPreGrasp/pose_datasets](https://drive.google.com/drive/folders/1gKqdrIu9GEYuV4FdRFeFCroRQ9OxL5MI?usp=sharing)
+We then create the expert dataset using the generated data by running the following shell. We provide the **generated dataset** on [DexFunPreGrasp/expert_datasets](https://drive.google.com/drive/folders/1gKqdrIu9GEYuV4FdRFeFCroRQ9OxL5MI?usp=sharing)
 ```
 sh ./create_expert_dataset.sh
 ```
 
 ### Student
+
+**Training**
+
+You can run the following shell to train the diffusion policy. Please note currently we only support DDPM and Switch for pointcloud training need to set "PCL=True" in "src/algorithms/DDIM/policy/DDIM.py" line 20.
+```
+sh ./train_diffusion.sh
+```
 ## Evaluation
 ```
 sh ./eval_diffusion.sh
