@@ -1,0 +1,272 @@
+__dim__:
+  num_fingers: 5
+  num_degrees_of_freedom: 30
+
+  num_object_points: ${...numObjectPointCloudPoints}
+  num_rendered_points: ${...numRenderedPointCloudPoints}
+  num_imagined_points: ${...numImaginedPointCloudPoints}
+  num_tactile_sensors: 14
+  num_fingertips: 5
+  num_keypoints: 21
+  num_actions: num_actions
+  num_categories: num_categories
+
+##################################################
+# Shadow hand
+##################################################
+
+shadow_hand_dof_position:
+  shape: num_degrees_of_freedom
+  attr: shadow_hand_dof_positions
+  tags: ["dof", "position"]
+
+shadow_hand_dof_velocity:
+  shape: num_degrees_of_freedom
+  attr: shadow_hand_dof_velocities
+  tags: ["velocity"]
+
+##################################################
+# End effector
+##################################################
+
+ur_endeffector_position:
+  shape: 3
+  attr: endeffector_positions
+
+ur_endeffector_orientation:
+  shape: 4
+  attr: endeffector_orientations
+
+palm_position_wrt_object:
+  shape: 3
+  attr: palm_positions_wrt_object
+
+palm_orientation_wrt_object:
+  shape: 4
+  attr: palm_orientations_wrt_object
+
+shadow_hand_position:
+  shape: 3
+  attr: shadow_hand_center_positions
+
+shadow_hand_orientation:
+  shape: 4
+  attr: shadow_hand_center_orientations
+
+shadow_hand_position_wrt_object:
+  shape: 3
+  attr: palm_positions_wrt_object
+
+shadow_hand_orientation_wrt_object:
+  shape: 4
+  attr: palm_orientations_wrt_object
+
+##################################################
+# Fingers
+##################################################
+
+fingertip_position:
+  shape: [num_fingers, 3]
+  attr: fingertip_positions
+
+fingertip_orientation:
+  shape: [num_fingers, 4]
+  attr: fingertip_orientations
+
+fingertip_distances:
+  shape: num_fingers
+  attr: fingertip_distances
+
+fingertip_position_wrt_palm:
+  shape: [num_fingers, 3]
+  attr: fingertip_positions_wrt_palm
+
+fingertip_orientation_wrt_palm:
+  shape: [num_fingers, 4]
+  attr: fingertip_orientations_wrt_palm
+
+fingertip_linear_velocity:
+  shape: [num_fingers, 3]
+  attr: fingertip_linear_velocities
+
+fingertip_angular_velocity:
+  shape: [num_fingers, 3]
+  attr: fingertip_angular_velocities
+
+##################################################
+# Object
+##################################################
+
+object_position:
+  shape: 3
+  attr: object_root_positions
+
+object_orientation:
+  shape: 4
+  attr: object_root_orientations
+
+object_position_wrt_palm:
+  shape: 3
+  attr: object_positions_wrt_palm
+
+object_orientation_wrt_palm:
+  shape: 4
+  attr: object_orientations_wrt_palm
+
+object_linear_velocity:
+  shape: 3
+  attr: object_root_linear_velocities
+
+object_angular_velocity:
+  shape: 3
+  attr: object_root_angular_velocities
+  tags: ["velocity"]
+
+object_category:
+  shape: num_categories
+  attr: object_categories
+
+##################################################
+# Geometry
+##################################################
+
+object_bbox:
+  shape: [3, 2]
+  attr: object_bboxes_wrt_world
+
+##################################################
+# Distance
+##################################################
+
+position_error:
+  shape: 3
+  attr: position_distances
+
+orientation_error:
+  shape: 4
+  attr: orientation_distances
+
+fingerjoint_error:
+  shape: 18
+  attr: dof_distances
+
+##################################################
+# Point cloud - rendered
+##################################################
+
+pointcloud_wrt_palm:
+  shape: [num_object_points, 3]
+  attr: pointclouds_wrt_palm
+  tags: ["perfect", "pointcloud"]
+
+object_pointcloud:
+  shape: [num_object_points, 3]
+  attr: object_pointclouds
+  tags: ["perfect", "pointcloud"]
+
+object_pointcloud_wrt_palm:
+  shape: [num_object_points, 3]
+  attr: object_pointclouds_wrt_palm
+  tags: ["perfect", "pointcloud"]
+
+target_object_pointcloud:
+  shape: [num_object_points, 3]
+  attr: target_object_pointclouds
+  tags: ["perfect", "pointcloud"]
+
+target_object_pointcloud_wrt_palm:
+  shape: [num_object_points, 3]
+  attr: target_object_pointclouds_wrt_palm
+  tags: ["pointcloud"]
+
+rendered_pointcloud:
+  shape: [num_rendered_points, 3]
+  attr: rendered_pointclouds
+  tags: ["rendered", "pointcloud"]
+
+imagined_pointcloud:
+  shape: [num_imagined_points, 3]
+  attr: imagined_pointclouds
+  tags: ["imagined", "pointcloud"]
+
+imagined_pointcloud_wrt_palm:
+  shape: [num_imagined_points, 3]
+  attr: imagined_pointclouds_wrt_palm
+  tags: ["imagined", "pointcloud"]
+
+target_imagined_pointcloud:
+  shape: [num_imagined_points, 3]
+  attr: target_imagined_pointclouds
+  tags: ["imagined", "pointcloud"]
+
+target_imagined_pointcloud_wrt_palm:
+  shape: [num_imagined_points, 3]
+  attr: target_imagined_pointclouds_wrt_palm
+  tags: ["imagined", "pointcloud"]
+
+##################################################
+# Target
+##################################################
+
+object_target_orn:
+  shape: 4
+  attr: object_targets
+
+object_target_relpose:
+  shape: 7
+  attr: object_targets
+
+object_target_relposecontact:
+  shape: 25
+  attr: object_targets
+
+target_grasp_pose_wrt_object:
+  shape: 7
+  attr: targets_palm_wrt_object
+
+target_hand_dof:
+  shape: 18
+  attr: targets_hand_dof
+
+target_hand_position_wrt_object:
+  shape: 3
+  attr: _r_target_palm_positions_wrt_object
+
+target_hand_orientation_wrt_object:
+  shape: 4
+  attr: _r_target_palm_orientations_wrt_object
+
+target_hand_dof_positions:
+  shape: 18
+  attr: _r_target_shadow_digits_actuated_dof_positions
+
+##################################################
+# Gradient Fields
+##################################################
+
+gf:
+  shape: num_actions
+  attr: gf
+  tags: ["gradient"]
+
+##################################################
+# Tactile
+##################################################
+
+tactile:
+  shape: num_tactile_sensors
+  attr: contact_forces
+  tags: ["tactile"]
+
+fingertip_tactile:
+  shape: num_fingertips
+  attr: fingertip_contact_forces
+  tags: ["tactile"]
+
+##################################################
+# Keypoints
+##################################################
+
+keypoint_positions:
+  shape: [num_keypoints, 3]
+  attr: keypoint_positions

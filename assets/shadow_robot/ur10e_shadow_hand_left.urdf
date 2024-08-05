@@ -1,0 +1,1720 @@
+<robot name="ur10e_robot">
+  
+  
+  
+  <transmission name="shoulder_pan_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="shoulder_pan_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="shoulder_pan_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="shoulder_lift_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="shoulder_lift_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="shoulder_lift_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="elbow_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="elbow_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="elbow_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="wrist_1_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="wrist_1_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="wrist_1_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="wrist_2_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="wrist_2_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="wrist_2_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="wrist_3_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="wrist_3_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="wrist_3_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+  <link name="base_link" />
+  <link name="base_link_inertia">
+    <visual>
+      <origin rpy="1.5707963267948966 0 3.141592653589793" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur10e/visual/base.dae" />
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 3.141592653589793" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur10e/collision/base.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="4.0" />
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <inertia ixx="0.0061063308908" ixy="0.0" ixz="0.0" iyy="0.0061063308908" iyz="0.0" izz="0.01125" />
+    </inertial>
+  </link>
+  <link name="shoulder_link">
+    <visual>
+      <origin rpy="1.5707963267948966 0 3.141592653589793" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur10e/visual/shoulder.dae" />
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 3.141592653589793" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur10e/collision/shoulder.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="7.778" />
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <inertia ixx="0.03147431257693659" ixy="0.0" ixz="0.0" iyy="0.03147431257693659" iyz="0.0" izz="0.021875624999999996" />
+    </inertial>
+  </link>
+  <link name="upper_arm_link">
+    <visual>
+      <origin rpy="3.141592653589793 0 -1.5707963267948966" xyz="0 0 0.1762" />
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur10e/visual/upperarm.dae" />
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0.1762" />
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur10e/collision/upperarm.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="12.93" />
+      <origin rpy="0 1.5707963267948966 0" xyz="-0.306 0.0 0.175" />
+      <inertia ixx="0.42175380379841093" ixy="0.0" ixz="0.0" iyy="0.42175380379841093" iyz="0.0" izz="0.03636562499999999" />
+    </inertial>
+  </link>
+  <link name="forearm_link">
+    <visual>
+      <origin rpy="3.141592653589793 0 -1.5707963267948966" xyz="0 0 0.0393" />
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur10e/visual/forearm.dae" />
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 -1.5707963267948966" xyz="0 0 0.0393" />
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur10e/collision/forearm.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="3.87" />
+      <origin rpy="0 1.5707963267948966 0" xyz="-0.285775 0.0 0.0393" />
+      <inertia ixx="0.11079302548902206" ixy="0.0" ixz="0.0" iyy="0.11079302548902206" iyz="0.0" izz="0.010884375" />
+    </inertial>
+  </link>
+  <link name="wrist_1_link">
+    <visual>
+      
+      <origin rpy="3.141592653589793 0 0" xyz="0 0 -0.135" />
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur10e/visual/wrist1.dae" />
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 -0.135" />
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur10e/collision/wrist1.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.96" />
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <inertia ixx="0.005108247956699999" ixy="0.0" ixz="0.0" iyy="0.005108247956699999" iyz="0.0" izz="0.005512499999999999" />
+    </inertial>
+  </link>
+  <link name="wrist_2_link">
+    <visual>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 -0.12" />
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur10e/visual/wrist2.dae" />
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 -0.12" />
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur10e/collision/wrist2.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.96" />
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <inertia ixx="0.005108247956699999" ixy="0.0" ixz="0.0" iyy="0.005108247956699999" iyz="0.0" izz="0.005512499999999999" />
+    </inertial>
+  </link>
+  <link name="wrist_3_link">
+    <visual>
+      <origin rpy="3.141592653589793 0 0" xyz="0 0 -0.1168" />
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur10e/visual/wrist3.dae" />
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 -0.1168" />
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur10e/collision/wrist3.stl" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.202" />
+      <origin rpy="0 0 0" xyz="0.0 0.0 -0.025" />
+      <inertia ixx="0.00014434577559500002" ixy="0.0" ixz="0.0" iyy="0.00014434577559500002" iyz="0.0" izz="0.00020452500000000002" />
+    </inertial>
+  </link>
+  
+  <joint name="base_link-base_link_inertia" type="fixed">
+    <parent link="base_link" />
+    <child link="base_link_inertia" />
+    
+    <origin rpy="0 0 3.141592653589793" xyz="0 0 0" />
+  </joint>
+  <joint name="shoulder_pan_joint" type="revolute">
+    <parent link="base_link_inertia" />
+    <child link="shoulder_link" />
+    <origin rpy="0 0 0" xyz="0 0 0.1807" />
+    <axis xyz="0 0 1" />
+    <limit effort="330.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="2.0943951023931953" />
+    <dynamics damping="0" friction="0" />
+  </joint>
+  <joint name="shoulder_lift_joint" type="revolute">
+    <parent link="shoulder_link" />
+    <child link="upper_arm_link" />
+    <origin rpy="1.570796327 0 0" xyz="0 0 0" />
+    <axis xyz="0 0 1" />
+    <limit effort="330.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="2.0943951023931953" />
+    <dynamics damping="0" friction="0" />
+  </joint>
+  <joint name="elbow_joint" type="revolute">
+    <parent link="upper_arm_link" />
+    <child link="forearm_link" />
+    <origin rpy="0 0 0" xyz="-0.6127 0 0" />
+    <axis xyz="0 0 1" />
+    <limit effort="150.0" lower="-3.141592653589793" upper="3.141592653589793" velocity="3.141592653589793" />
+    <dynamics damping="0" friction="0" />
+  </joint>
+  <joint name="wrist_1_joint" type="revolute">
+    <parent link="forearm_link" />
+    <child link="wrist_1_link" />
+    <origin rpy="0 0 0" xyz="-0.57155 0 0.17415" />
+    <axis xyz="0 0 1" />
+    <limit effort="56.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="3.141592653589793" />
+    <dynamics damping="0" friction="0" />
+  </joint>
+  <joint name="wrist_2_joint" type="revolute">
+    <parent link="wrist_1_link" />
+    <child link="wrist_2_link" />
+    <origin rpy="1.570796327 0 0" xyz="0 -0.11985 -2.458164590756244e-11" />
+    <axis xyz="0 0 1" />
+    <limit effort="56.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="3.141592653589793" />
+    <dynamics damping="0" friction="0" />
+  </joint>
+  <joint name="wrist_3_joint" type="revolute">
+    <parent link="wrist_2_link" />
+    <child link="wrist_3_link" />
+    <origin rpy="1.570796326589793 3.141592653589793 3.141592653589793" xyz="0 0.11655 -2.390480459346185e-11" />
+    <axis xyz="0 0 1" />
+    <limit effort="56.0" lower="-6.283185307179586" upper="6.283185307179586" velocity="3.141592653589793" />
+    <dynamics damping="0" friction="0" />
+  </joint>
+  
+  <link name="base" />
+  <joint name="base_link-base_fixed_joint" type="fixed">
+    
+    <origin rpy="0 0 3.141592653589793" xyz="0 0 0" />
+    <parent link="base_link" />
+    <child link="base" />
+  </joint>
+  
+  <link name="flange" />
+  <joint name="wrist_3-flange" type="fixed">
+    <parent link="wrist_3_link" />
+    <child link="flange" />
+    <origin rpy="0 -1.5707963267948966 -1.5707963267948966" xyz="0 0 0" />
+  </joint>
+  
+  <link name="tool0" />
+  <joint name="flange-tool0" type="fixed">
+    
+    <origin rpy="1.5707963267948966 0 1.5707963267948966" xyz="0 0 0" />
+    <parent link="flange" />
+    <child link="tool0" />
+  </joint>
+  <material name="Blue">
+    <color rgba="0.0 0.0 0.8 1.0" />
+  </material>
+  <material name="Green">
+    <color rgba="0.0 0.8 0.0 1.0" />
+  </material>
+  <material name="BiotacGreen">
+    <color rgba="0.31 0.85 0.42 1.0" />
+  </material>
+  <material name="Grey">
+    <color rgba="0.2 0.2 0.2 1.0" />
+  </material>
+  <material name="LightGrey">
+    <color rgba="0.6 0.6 0.6 1.0" />
+  </material>
+  <material name="Red">
+    <color rgba="0.8 0.0 0.0 1.0" />
+  </material>
+  <material name="White">
+    <color rgba="1.0 1.0 1.0 1.0" />
+  </material>
+  <gazebo>
+    <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
+      <robotSimType>sr_gazebo_sim/SrGazeboHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+  <link name="lh_forearm">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0.09" />
+      <mass value="3.0" />
+      <inertia ixx="0.0138" ixy="0.0" ixz="0.0" iyy="0.0138" iyz="0.0" izz="0.00744" />
+    </inertial>
+    <visual>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0.006" />
+      <geometry name="lh_forearm_visual">
+        <mesh filename="package://sr_description/meshes/components/forearm/forearm_E3M5.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="light_grey">
+        <color rgba="0.90000 0.90000 0.90000 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0.006" />
+      <geometry name="lh_forearm_collision">
+        <mesh filename="package://sr_description/meshes/components/forearm/forearm_collision_E3M5.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+    
+    <collision>
+      <origin rpy="0 0.78 0" xyz="0 -0.01 0.187" />
+      <geometry>
+        <box size="0.07 0.07 0.07" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry name="lh_mounting_plate">
+        <mesh filename="package://sr_description/meshes/components/mounting_plate/mounting_plate_E3M5.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.002" />
+      <geometry>
+        <cylinder length="0.008" radius="0.0675" />
+      </geometry>
+    </collision>
+    
+    
+  </link>
+  <gazebo reference="lh_forearm">
+    <selfCollide>false</selfCollide>
+  </gazebo>
+  <link name="lh_wrist">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0.029" />
+      <mass value="0.1" />
+      <inertia ixx="0.000035" ixy="0.0" ixz="0.0" iyy="0.000064" iyz="0.0" izz="0.0000438" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry name="lh_wrist_visual">
+        <mesh filename="package://sr_description/meshes/components/wrist/wrist_E3M5.dae" scale="-0.001 0.001 0.001" />
+      </geometry>
+      <material name="LightGrey" />
+    </visual>
+    <collision>
+      <origin rpy="1.5708 1.5708 0" xyz="0 0 0" />
+      <geometry name="lh_wrist_collision_geom">
+        <cylinder length="0.030" radius="0.0135" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 1.5708 0" xyz="0.026 0 0.034" />
+      <geometry>
+        <cylinder length="0.010" radius="0.011" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 1.5708 0" xyz="-0.031 0 0.034" />
+      <geometry>
+        <cylinder length="0.010" radius="0.011" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 -0.7854 0" xyz="0.021 0 0.011" />
+      <geometry>
+        <box size="0.027 0.018 0.010" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0.7854 0" xyz="-0.026 0 0.010" />
+      <geometry>
+        <box size="0.027 0.018 0.010" />
+      </geometry>
+    </collision>
+  </link>
+  <gazebo reference="lh_wrist">
+    <material>Gazebo/White</material>
+    <selfCollide>false</selfCollide>
+  </gazebo>
+  <joint name="lh_WRJ2" type="revolute">
+    <parent link="lh_forearm" />
+    <child link="lh_wrist" />
+    <origin rpy="0 0 0" xyz="0 -0.010 0.21301" />
+    <axis xyz="0 -1 0" />
+    <limit effort="10" lower="-0.5235987755982988" upper="0.17453292519943295" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_WRJ2">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_wrist_transmission">
+    <type>sr_mechanism_model/SimpleTransmission</type>
+    <actuator name="lh_WRJ2">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_WRJ2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <link name="lh_palm">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0.035" />
+      <mass value="0.3" />
+      <inertia ixx="0.0003581" ixy="0.0" ixz="0.0" iyy="0.0005287" iyz="0.0" izz="0.000191" />
+    </inertial>
+    <visual>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0" />
+      <geometry name="lh_palm_visual">
+        <mesh filename="package://sr_description/meshes/components/palm/palm_E3M5.dae" scale="-0.001 0.001 0.001" />
+      </geometry>
+      <material name="Grey" />
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.011 0.0085 0.038" />
+      <geometry name="lh_palm_collision_geom">
+        <box size="0.062 0.007 0.098" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0.002 -0.0035 0.038" />
+      <geometry>
+        <box size="0.036 0.017 0.098" />
+      </geometry>
+    </collision>
+    
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.029 -0.0035 0.082" />
+      <geometry>
+        <box size="0.026 0.017 0.010" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0.2 0 -0.25" xyz="-0.0265 -0.001 0.070" />
+      <geometry>
+        <box size="0.026 0.014 0.018" />
+      </geometry>
+    </collision>
+    
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.0315 -0.0085 0.001" />
+      <geometry>
+        <box size="0.021 0.027 0.024" />
+      </geometry>
+    </collision>
+    
+    <collision>
+      <origin rpy="0 0 0.48" xyz="-0.0125 -0.015 0.009" />
+      <geometry>
+        <box size="0.022 0.005 0.040" />
+      </geometry>
+    </collision>
+    
+    <collision>
+      <origin rpy="0 0 0" xyz="-0.011 0 0.089" />
+      <geometry>
+        <box size="0.018 0.024 0.004" />
+      </geometry>
+    </collision>
+    
+    <collision>
+      <origin rpy="0 0 0" xyz="0.03 0 0.009" />
+      <geometry>
+        <box size="0.020 0.024 0.040" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_ee_fixed_joint" type="fixed">
+    <parent link="lh_palm" />
+    <child link="lh_manipulator" />
+    <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.05" />
+  </joint>
+  <link name="lh_manipulator" />
+  <joint name="lh_WRJ1" type="revolute">
+    <parent link="lh_wrist" />
+    <child link="lh_palm" />
+    <origin rpy="0 0 0" xyz="0 0 0.034" />
+    <axis xyz="1 0 0" />
+    <limit effort="30" lower="-0.6981317007977318" upper="0.4886921905584123" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_WRJ1">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <link name="lh_imu" />
+  <joint name="lh_palm_to_imu" type="fixed">
+    <parent link="lh_palm" />
+    <child link="lh_imu" />
+    <origin rpy="-1.5707963 3.141592 0.0" xyz="0.01785 0.00765 0.049125" />
+  </joint>
+  <transmission name="lh_palm_transmission">
+    <type>sr_mechanism_model/SimpleTransmission</type>
+    <actuator name="lh_WRJ1">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_WRJ1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_palm">
+  </gazebo>
+  <link name="lh_ffknuckle">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <mass value="0.008" />
+      <inertia ixx="0.00000026" ixy="0.0" ixz="0.0" iyy="0.00000026" iyz="0.0" izz="0.00000032" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.0005" />
+      <geometry name="lh_ffknuckle_visual">
+        <mesh filename="package://sr_description/meshes/components/f_knuckle/f_knuckle_E3M5.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="LightGrey" />
+    </visual>
+    <collision>
+      <origin rpy="0 1.5708 0" xyz="0 0 0" />
+      <geometry name="lh_ffknuckle_collision_geom">
+        <cylinder length="0.014" radius="0.007" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_FFJ4" type="revolute">
+    <parent link="lh_palm" />
+    <child link="lh_ffknuckle" />
+    
+    <origin rpy="0 0 0" xyz="-0.033 0 0.095" />
+    <axis xyz="0 1 0" />
+    <limit effort="2" lower="-0.3490658503988659" upper="0.3490658503988659" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_FFJ4">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_ffknuckle_transmission">
+    <type>sr_mechanism_model/SimpleTransmission</type>
+    <actuator name="lh_FFJ4">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_FFJ4">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_ffknuckle">
+    
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <link name="lh_ffproximal">
+    <inertial>
+      <mass value="0.030" />
+      <origin xyz="0 0 0.0225" />
+      <inertia ixx="0.0000098" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.0000018" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry name="lh_ffproximal_visual">
+        <mesh filename="package://sr_description/meshes/components/f_proximal/f_proximal_E3M5.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="Grey" />
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.025" />
+      <geometry name="lh_ffproximal_collision_geom">
+        <cylinder length="0.040" radius="0.007" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_FFJ3" type="revolute">
+    <parent link="lh_ffknuckle" />
+    <child link="lh_ffproximal" />
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <axis xyz="1 0 0" />
+    <limit effort="2" lower="-0.2617993877991494" upper="1.5707963267948966" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_FFJ3">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_ffproximal_transmission">
+    <type>sr_mechanism_model/SimpleTransmission</type>
+    <actuator name="lh_FFJ3">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_FFJ3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_ffproximal">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <link name="lh_ffmiddle">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0.0125" />
+      <mass value="0.017" />
+      <inertia ixx="0.0000026" ixy="0.0" ixz="0.0" iyy="0.0000027" iyz="0.0" izz="0.00000087" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry name="lh_ffmiddle_visual">
+        <mesh filename="package://sr_description/meshes/components/f_middle/f_middle_E3M5.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="Grey" />
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.0125" />
+      <geometry name="lh_ffmiddle_collision_geom">
+        <cylinder length="0.025" radius="0.007" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.0" />
+      <geometry>
+        <sphere radius="0.007" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.025" />
+      <geometry>
+        <sphere radius="0.007" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_FFJ2" type="revolute">
+    <parent link="lh_ffproximal" />
+    <child link="lh_ffmiddle" />
+    <origin rpy="0 0 0" xyz="0 0 0.045" />
+    <axis xyz="1 0 0" />
+    <limit effort="2" lower="0" upper="1.5707963267948966" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_FFJ2">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_ffmiddle_transmission">
+    <type>sr_mechanism_model/J0Transmission</type>
+    <actuator name="lh_FFJ0">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_FFJ1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_ffmiddle">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <link name="lh_ffdistal">
+    <inertial>
+      <mass value="0.012" />
+      <origin xyz="0 0 0.012" />
+      <inertia ixx="0.00000094" ixy="0.0" ixz="0.0" iyy="0.0000011" iyz="0.0" izz="0.00000053" />
+    </inertial>
+    <visual>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0" />
+      <geometry name="lh_ffdistal_visual">
+        <mesh filename="package://sr_description/meshes/components/f_distal/pst/f_distal_pst.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0" />
+      <geometry name="lh_ffdistal_collision_geom">
+        <mesh filename="package://sr_description/meshes/components/f_distal/pst/f_distal_pst.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_FFJ1" type="revolute">
+    <parent link="lh_ffmiddle" />
+    <child link="lh_ffdistal" />
+    <origin rpy="0 0 0" xyz="0 0 0.025" />
+    <axis xyz="1 0 0" />
+    
+    <limit effort="2" lower="0" upper="1.5707963267948966" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_FFJ1">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <link name="lh_fftip">
+    <inertial>
+      <mass value="0.001" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <joint name="lh_FFtip" type="fixed">
+    <parent link="lh_ffdistal" />
+    <child link="lh_fftip" />
+    <origin rpy="0 0 0" xyz="0 0 0.026" />
+  </joint>
+  <gazebo reference="lh_ffdistal">
+    <sensor name="lh_ffdistal_contact" type="contact">
+      <always_on>1</always_on>
+      <update_rate>1000.0</update_rate>
+      <contact>
+        <collision>lh_ffdistal_collision</collision>
+        <topic>lh_ffdistal_collision</topic>
+      </contact>
+      <plugin filename="libgazebo_ros_bumper.so" name="lh_ffdistal_gazebo_ros_bumper_controller">
+        <alwaysOn>true</alwaysOn>
+        <frameName>lh_ffdistal</frameName>
+        <updateRate>100.0</updateRate>
+        <bumperTopicName>contacts/lh_ff/distal</bumperTopicName>
+      </plugin>
+    </sensor>
+    <mu1 value="500.0" />
+    <mu2 value="500.0" />
+    <kp value="10000000.0" />
+    <kd value="1.0" />
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <link name="lh_mfknuckle">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <mass value="0.008" />
+      <inertia ixx="0.00000026" ixy="0.0" ixz="0.0" iyy="0.00000026" iyz="0.0" izz="0.00000032" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.0005" />
+      <geometry name="lh_mfknuckle_visual">
+        <mesh filename="package://sr_description/meshes/components/f_knuckle/f_knuckle_E3M5.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="LightGrey" />
+    </visual>
+    <collision>
+      <origin rpy="0 1.5708 0" xyz="0 0 0" />
+      <geometry name="lh_mfknuckle_collision_geom">
+        <cylinder length="0.014" radius="0.007" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_MFJ4" type="revolute">
+    <parent link="lh_palm" />
+    <child link="lh_mfknuckle" />
+    
+    <origin rpy="0 0 0" xyz="-0.011 0 0.099" />
+    <axis xyz="0 1 0" />
+    <limit effort="2" lower="-0.3490658503988659" upper="0.3490658503988659" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_MFJ4">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_mfknuckle_transmission">
+    <type>sr_mechanism_model/SimpleTransmission</type>
+    <actuator name="lh_MFJ4">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_MFJ4">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_mfknuckle">
+    
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <link name="lh_mfproximal">
+    <inertial>
+      <mass value="0.030" />
+      <origin xyz="0 0 0.0225" />
+      <inertia ixx="0.0000098" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.0000018" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry name="lh_mfproximal_visual">
+        <mesh filename="package://sr_description/meshes/components/f_proximal/f_proximal_E3M5.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="Grey" />
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.025" />
+      <geometry name="lh_mfproximal_collision_geom">
+        <cylinder length="0.040" radius="0.007" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_MFJ3" type="revolute">
+    <parent link="lh_mfknuckle" />
+    <child link="lh_mfproximal" />
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <axis xyz="1 0 0" />
+    <limit effort="2" lower="-0.2617993877991494" upper="1.5707963267948966" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_MFJ3">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_mfproximal_transmission">
+    <type>sr_mechanism_model/SimpleTransmission</type>
+    <actuator name="lh_MFJ3">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_MFJ3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_mfproximal">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <link name="lh_mfmiddle">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0.0125" />
+      <mass value="0.017" />
+      <inertia ixx="0.0000026" ixy="0.0" ixz="0.0" iyy="0.0000027" iyz="0.0" izz="0.00000087" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry name="lh_mfmiddle_visual">
+        <mesh filename="package://sr_description/meshes/components/f_middle/f_middle_E3M5.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="Grey" />
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.0125" />
+      <geometry name="lh_mfmiddle_collision_geom">
+        <cylinder length="0.025" radius="0.007" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.0" />
+      <geometry>
+        <sphere radius="0.007" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.025" />
+      <geometry>
+        <sphere radius="0.007" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_MFJ2" type="revolute">
+    <parent link="lh_mfproximal" />
+    <child link="lh_mfmiddle" />
+    <origin rpy="0 0 0" xyz="0 0 0.045" />
+    <axis xyz="1 0 0" />
+    <limit effort="2" lower="0" upper="1.5707963267948966" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_MFJ2">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_mfmiddle_transmission">
+    <type>sr_mechanism_model/J0Transmission</type>
+    <actuator name="lh_MFJ0">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_MFJ1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_mfmiddle">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <link name="lh_mfdistal">
+    <inertial>
+      <mass value="0.012" />
+      <origin xyz="0 0 0.012" />
+      <inertia ixx="0.00000094" ixy="0.0" ixz="0.0" iyy="0.0000011" iyz="0.0" izz="0.00000053" />
+    </inertial>
+    <visual>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0" />
+      <geometry name="lh_mfdistal_visual">
+        <mesh filename="package://sr_description/meshes/components/f_distal/pst/f_distal_pst.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0" />
+      <geometry name="lh_mfdistal_collision_geom">
+        <mesh filename="package://sr_description/meshes/components/f_distal/pst/f_distal_pst.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_MFJ1" type="revolute">
+    <parent link="lh_mfmiddle" />
+    <child link="lh_mfdistal" />
+    <origin rpy="0 0 0" xyz="0 0 0.025" />
+    <axis xyz="1 0 0" />
+    
+    <limit effort="2" lower="0" upper="1.5707963267948966" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_MFJ1">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <link name="lh_mftip">
+    <inertial>
+      <mass value="0.001" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <joint name="lh_MFtip" type="fixed">
+    <parent link="lh_mfdistal" />
+    <child link="lh_mftip" />
+    <origin rpy="0 0 0" xyz="0 0 0.026" />
+  </joint>
+  <gazebo reference="lh_mfdistal">
+    <sensor name="lh_mfdistal_contact" type="contact">
+      <always_on>1</always_on>
+      <update_rate>1000.0</update_rate>
+      <contact>
+        <collision>lh_mfdistal_collision</collision>
+        <topic>lh_mfdistal_collision</topic>
+      </contact>
+      <plugin filename="libgazebo_ros_bumper.so" name="lh_mfdistal_gazebo_ros_bumper_controller">
+        <alwaysOn>true</alwaysOn>
+        <frameName>lh_mfdistal</frameName>
+        <updateRate>100.0</updateRate>
+        <bumperTopicName>contacts/lh_mf/distal</bumperTopicName>
+      </plugin>
+    </sensor>
+    <mu1 value="500.0" />
+    <mu2 value="500.0" />
+    <kp value="10000000.0" />
+    <kd value="1.0" />
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <link name="lh_rfknuckle">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <mass value="0.008" />
+      <inertia ixx="0.00000026" ixy="0.0" ixz="0.0" iyy="0.00000026" iyz="0.0" izz="0.00000032" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.0005" />
+      <geometry name="lh_rfknuckle_visual">
+        <mesh filename="package://sr_description/meshes/components/f_knuckle/f_knuckle_E3M5.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="LightGrey" />
+    </visual>
+    <collision>
+      <origin rpy="0 1.5708 0" xyz="0 0 0" />
+      <geometry name="lh_rfknuckle_collision_geom">
+        <cylinder length="0.014" radius="0.007" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_RFJ4" type="revolute">
+    <parent link="lh_palm" />
+    <child link="lh_rfknuckle" />
+    
+    <origin rpy="0 0 0" xyz="0.011 0 0.095" />
+    <axis xyz="0 -1 0" />
+    <limit effort="2" lower="-0.3490658503988659" upper="0.3490658503988659" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_RFJ4">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_rfknuckle_transmission">
+    <type>sr_mechanism_model/SimpleTransmission</type>
+    <actuator name="lh_RFJ4">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_RFJ4">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_rfknuckle">
+    
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <link name="lh_rfproximal">
+    <inertial>
+      <mass value="0.030" />
+      <origin xyz="0 0 0.0225" />
+      <inertia ixx="0.0000098" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.0000018" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry name="lh_rfproximal_visual">
+        <mesh filename="package://sr_description/meshes/components/f_proximal/f_proximal_E3M5.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="Grey" />
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.025" />
+      <geometry name="lh_rfproximal_collision_geom">
+        <cylinder length="0.040" radius="0.007" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_RFJ3" type="revolute">
+    <parent link="lh_rfknuckle" />
+    <child link="lh_rfproximal" />
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <axis xyz="1 0 0" />
+    <limit effort="2" lower="-0.2617993877991494" upper="1.5707963267948966" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_RFJ3">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_rfproximal_transmission">
+    <type>sr_mechanism_model/SimpleTransmission</type>
+    <actuator name="lh_RFJ3">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_RFJ3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_rfproximal">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <link name="lh_rfmiddle">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0.0125" />
+      <mass value="0.017" />
+      <inertia ixx="0.0000026" ixy="0.0" ixz="0.0" iyy="0.0000027" iyz="0.0" izz="0.00000087" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry name="lh_rfmiddle_visual">
+        <mesh filename="package://sr_description/meshes/components/f_middle/f_middle_E3M5.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="Grey" />
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.0125" />
+      <geometry name="lh_rfmiddle_collision_geom">
+        <cylinder length="0.025" radius="0.007" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.0" />
+      <geometry>
+        <sphere radius="0.007" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.025" />
+      <geometry>
+        <sphere radius="0.007" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_RFJ2" type="revolute">
+    <parent link="lh_rfproximal" />
+    <child link="lh_rfmiddle" />
+    <origin rpy="0 0 0" xyz="0 0 0.045" />
+    <axis xyz="1 0 0" />
+    <limit effort="2" lower="0" upper="1.5707963267948966" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_RFJ2">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_rfmiddle_transmission">
+    <type>sr_mechanism_model/J0Transmission</type>
+    <actuator name="lh_RFJ0">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_RFJ1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_rfmiddle">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <link name="lh_rfdistal">
+    <inertial>
+      <mass value="0.012" />
+      <origin xyz="0 0 0.012" />
+      <inertia ixx="0.00000094" ixy="0.0" ixz="0.0" iyy="0.0000011" iyz="0.0" izz="0.00000053" />
+    </inertial>
+    <visual>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0" />
+      <geometry name="lh_rfdistal_visual">
+        <mesh filename="package://sr_description/meshes/components/f_distal/pst/f_distal_pst.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0" />
+      <geometry name="lh_rfdistal_collision_geom">
+        <mesh filename="package://sr_description/meshes/components/f_distal/pst/f_distal_pst.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_RFJ1" type="revolute">
+    <parent link="lh_rfmiddle" />
+    <child link="lh_rfdistal" />
+    <origin rpy="0 0 0" xyz="0 0 0.025" />
+    <axis xyz="1 0 0" />
+    
+    <limit effort="2" lower="0" upper="1.5707963267948966" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_RFJ1">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <link name="lh_rftip">
+    <inertial>
+      <mass value="0.001" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <joint name="lh_RFtip" type="fixed">
+    <parent link="lh_rfdistal" />
+    <child link="lh_rftip" />
+    <origin rpy="0 0 0" xyz="0 0 0.026" />
+  </joint>
+  <gazebo reference="lh_rfdistal">
+    <sensor name="lh_rfdistal_contact" type="contact">
+      <always_on>1</always_on>
+      <update_rate>1000.0</update_rate>
+      <contact>
+        <collision>lh_rfdistal_collision</collision>
+        <topic>lh_rfdistal_collision</topic>
+      </contact>
+      <plugin filename="libgazebo_ros_bumper.so" name="lh_rfdistal_gazebo_ros_bumper_controller">
+        <alwaysOn>true</alwaysOn>
+        <frameName>lh_rfdistal</frameName>
+        <updateRate>100.0</updateRate>
+        <bumperTopicName>contacts/lh_rf/distal</bumperTopicName>
+      </plugin>
+    </sensor>
+    <mu1 value="500.0" />
+    <mu2 value="500.0" />
+    <kp value="10000000.0" />
+    <kd value="1.0" />
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <link name="lh_lfmetacarpal">
+    <inertial>
+      <origin rpy="0 -0.9599 0" xyz="-0.03174867647058824 0 0.02235294117647059" />
+      <mass value="0.030" />
+      <inertia ixx="0.0000145" ixy="0.0" ixz="0.0" iyy="0.00001638" iyz="0.0" izz="0.000004272" />
+    </inertial>
+    <visual>
+      <origin rpy="0 -0.9599 0" xyz="0 0 0" />
+      <geometry name="lh_lfmetacarpal_visual">
+        <mesh filename="package://sr_description/meshes/components/lf_metacarpal/lf_metacarpal_E3M5.dae" scale="-0.001 0.001 0.001" />
+      </geometry>
+      <material name="Grey" />
+    </visual>
+    <collision>
+      <origin rpy="0 -0.9599 0" xyz="-0.026986375 0 0.019" />
+      <geometry name="lh_lfmetacarpal_collision_geom">
+        <box size="0.018 0.024 0.040" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_LFJ5" type="revolute">
+    <parent link="lh_palm" />
+    <child link="lh_lfmetacarpal" />
+    <origin rpy="0 0.9599 0" xyz="0.033 0 0.02071" />
+    <axis xyz="1 0 0" />
+    <limit effort="2" lower="0" upper="0.7853981633974483" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_LFJ5">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_lfmetacarpal_transmission">
+    <type>sr_mechanism_model/SimpleTransmission</type>
+    <actuator name="lh_LFJ5">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_LFJ5">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_lfmetacarpal">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <link name="lh_lfknuckle">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <mass value="0.008" />
+      <inertia ixx="0.00000026" ixy="0.0" ixz="0.0" iyy="0.00000026" iyz="0.0" izz="0.00000032" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.0005" />
+      <geometry name="lh_lfknuckle_visual">
+        <mesh filename="package://sr_description/meshes/components/f_knuckle/f_knuckle_E3M5.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="LightGrey" />
+    </visual>
+    <collision>
+      <origin rpy="0 1.5708 0" xyz="0 0 0" />
+      <geometry name="lh_lfknuckle_collision_geom">
+        <cylinder length="0.014" radius="0.007" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_LFJ4" type="revolute">
+    <parent link="lh_lfmetacarpal" />
+    <child link="lh_lfknuckle" />
+    
+    <origin rpy="0 -0.9599 0" xyz="-0.05397275 0 0.03779463" />
+    <axis xyz="0 -1 0" />
+    <limit effort="2" lower="-0.3490658503988659" upper="0.3490658503988659" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_LFJ4">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_lfknuckle_transmission">
+    <type>sr_mechanism_model/SimpleTransmission</type>
+    <actuator name="lh_LFJ4">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_LFJ4">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_lfknuckle">
+    
+    <material>Gazebo/Grey</material>
+  </gazebo>
+  <link name="lh_lfproximal">
+    <inertial>
+      <mass value="0.030" />
+      <origin xyz="0 0 0.0225" />
+      <inertia ixx="0.0000098" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.0000018" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry name="lh_lfproximal_visual">
+        <mesh filename="package://sr_description/meshes/components/f_proximal/f_proximal_E3M5.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="Grey" />
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.025" />
+      <geometry name="lh_lfproximal_collision_geom">
+        <cylinder length="0.040" radius="0.007" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_LFJ3" type="revolute">
+    <parent link="lh_lfknuckle" />
+    <child link="lh_lfproximal" />
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <axis xyz="1 0 0" />
+    <limit effort="2" lower="-0.2617993877991494" upper="1.5707963267948966" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_LFJ3">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_lfproximal_transmission">
+    <type>sr_mechanism_model/SimpleTransmission</type>
+    <actuator name="lh_LFJ3">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_LFJ3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_lfproximal">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <link name="lh_lfmiddle">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0.0125" />
+      <mass value="0.017" />
+      <inertia ixx="0.0000026" ixy="0.0" ixz="0.0" iyy="0.0000027" iyz="0.0" izz="0.00000087" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry name="lh_lfmiddle_visual">
+        <mesh filename="package://sr_description/meshes/components/f_middle/f_middle_E3M5.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="Grey" />
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.0125" />
+      <geometry name="lh_lfmiddle_collision_geom">
+        <cylinder length="0.025" radius="0.007" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.0" />
+      <geometry>
+        <sphere radius="0.007" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.025" />
+      <geometry>
+        <sphere radius="0.007" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_LFJ2" type="revolute">
+    <parent link="lh_lfproximal" />
+    <child link="lh_lfmiddle" />
+    <origin rpy="0 0 0" xyz="0 0 0.045" />
+    <axis xyz="1 0 0" />
+    <limit effort="2" lower="0" upper="1.5707963267948966" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_LFJ2">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_lfmiddle_transmission">
+    <type>sr_mechanism_model/J0Transmission</type>
+    <actuator name="lh_LFJ0">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_LFJ1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_lfmiddle">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <link name="lh_lfdistal">
+    <inertial>
+      <mass value="0.012" />
+      <origin xyz="0 0 0.012" />
+      <inertia ixx="0.00000094" ixy="0.0" ixz="0.0" iyy="0.0000011" iyz="0.0" izz="0.00000053" />
+    </inertial>
+    <visual>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0" />
+      <geometry name="lh_lfdistal_visual">
+        <mesh filename="package://sr_description/meshes/components/f_distal/pst/f_distal_pst.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0" />
+      <geometry name="lh_lfdistal_collision_geom">
+        <mesh filename="package://sr_description/meshes/components/f_distal/pst/f_distal_pst.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_LFJ1" type="revolute">
+    <parent link="lh_lfmiddle" />
+    <child link="lh_lfdistal" />
+    <origin rpy="0 0 0" xyz="0 0 0.025" />
+    <axis xyz="1 0 0" />
+    
+    <limit effort="2" lower="0" upper="1.5707963267948966" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_LFJ1">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <link name="lh_lftip">
+    <inertial>
+      <mass value="0.001" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <joint name="lh_LFtip" type="fixed">
+    <parent link="lh_lfdistal" />
+    <child link="lh_lftip" />
+    <origin rpy="0 0 0" xyz="0 0 0.026" />
+  </joint>
+  <gazebo reference="lh_lfdistal">
+    <sensor name="lh_lfdistal_contact" type="contact">
+      <always_on>1</always_on>
+      <update_rate>1000.0</update_rate>
+      <contact>
+        <collision>lh_lfdistal_collision</collision>
+        <topic>lh_lfdistal_collision</topic>
+      </contact>
+      <plugin filename="libgazebo_ros_bumper.so" name="lh_lfdistal_gazebo_ros_bumper_controller">
+        <alwaysOn>true</alwaysOn>
+        <frameName>lh_lfdistal</frameName>
+        <updateRate>100.0</updateRate>
+        <bumperTopicName>contacts/lh_lf/distal</bumperTopicName>
+      </plugin>
+    </sensor>
+    <mu1 value="500.0" />
+    <mu2 value="500.0" />
+    <kp value="10000000.0" />
+    <kd value="1.0" />
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <link name="lh_thbase">
+    <inertial>
+      <mass value="0.010" />
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <inertia ixx="0.00000016" ixy="0.0" ixz="0.0" iyy="0.00000016" iyz="0.0" izz="0.00000016" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry name="lh_thbase_visual">
+        <box size="0.001 0.001 0.001" />
+      </geometry>
+      <material name="shadow_thbase_material">
+        <color rgba="0.5 0.5 0.5 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry name="lh_thbase_collision_geom">
+        <sphere radius="0.011" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_THJ5" type="revolute">
+    <parent link="lh_palm" />
+    <child link="lh_thbase" />
+    <origin rpy="-0.7853981633974483 0 1.5707963267948966" xyz="-0.034 -0.00858 0.029" />
+    <axis xyz="0 0 1" />
+    <limit effort="5.0" lower="-1.0471975511965976" upper="1.0471975511965976" velocity="4.0" />
+    <dynamics damping="0.2" />
+  </joint>
+  <gazebo reference="lh_THJ5">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_thbase_transmission">
+    <type>sr_mechanism_model/SimpleTransmission</type>
+    <actuator name="lh_THJ5">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_THJ5">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_thbase">
+    
+    <selfCollide>false</selfCollide>
+  </gazebo>
+  <link name="lh_thproximal">
+    <inertial>
+      <mass value="0.040" />
+      <origin rpy="0 0 0" xyz="0 0 0.019" />
+      <inertia ixx="0.0000136" ixy="0.0" ixz="0.0" iyy="0.0000136" iyz="0.0" izz="0.00000313" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 1.5707963267948966" xyz="0 0 0" />
+      <geometry name="lh_thproximal_visual">
+        <mesh filename="package://sr_description/meshes/components/th_proximal/th_proximal_E3M5.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="shadow_thproximal_material">
+        <color rgba="0.2 0.2 0.2 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.020" />
+      <geometry name="lh_thproximal_collision_geom">
+        <cylinder length="0.018" radius="0.012" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_THJ4" type="revolute">
+    <parent link="lh_thbase" />
+    <child link="lh_thproximal" />
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <axis xyz="0 -1 0" />
+    <limit effort="3" lower="0.0" upper="1.2217304763960306" velocity="4.0" />
+    <dynamics damping="0.2" />
+  </joint>
+  <gazebo reference="lh_THJ4">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_thproximal_transmission">
+    <type>sr_mechanism_model/SimpleTransmission</type>
+    <actuator name="lh_THJ4">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_THJ4">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_thproximal">
+    <selfCollide>false</selfCollide>
+  </gazebo>
+  <link name="lh_thhub">
+    <inertial>
+      <mass value="0.005" />
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <inertia ixx="0.000001" ixy="0.0" ixz="0.0" iyy="0.000001" iyz="0.0" izz="0.0000003" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry name="lh_thhub_visual">
+        <box size="0.001 0.001 0.001" />
+      </geometry>
+      <material name="shadow_thhub_material">
+        <color rgba="0.7 0.7 0.7 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry name="lh_thhub_collision_geom">
+        <sphere radius="0.010" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_THJ3" type="revolute">
+    <parent link="lh_thproximal" />
+    <child link="lh_thhub" />
+    <origin rpy="0 0 0" xyz="0 0 0.038" />
+    <axis xyz="0 -1 0" />
+    <limit effort="2.0" lower="-0.20943951023931953" upper="0.20943951023931953" velocity="4.0" />
+    <dynamics damping="0.2" />
+  </joint>
+  <gazebo reference="lh_THJ3">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_thhub_transmission">
+    <type>sr_mechanism_model/SimpleTransmission</type>
+    <actuator name="lh_THJ3">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_THJ3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_thhub">
+    
+    <selfCollide>false</selfCollide>
+  </gazebo>
+  <link name="lh_thmiddle">
+    <inertial>
+      <mass value="0.020" />
+      <origin rpy="0 0 0" xyz="0 0 0.016" />
+      <inertia ixx="0.0000051" ixy="0.0" ixz="0.0" iyy="0.0000051" iyz="0.0" izz="0.00000121" />
+    </inertial>
+    <visual>
+      <origin rpy="0 0 1.5707963267948966" xyz="0 0 0" />
+      <geometry name="lh_thmiddle_visual">
+        <mesh filename="package://sr_description/meshes/components/th_middle/th_middle_E3M5.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="shadow_thmiddle_material">
+        <color rgba="0.2 0.2 0.2 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.012" />
+      <geometry name="lh_thmiddle_collision_geom">
+        <cylinder length="0.018" radius="0.011" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.019" />
+      <geometry>
+        <sphere radius="0.011" />
+      </geometry>
+    </collision>
+    <collision>
+      <origin rpy="0 1.5708 0" xyz="0 0 0.032" />
+      <geometry>
+        <cylinder length="0.014" radius="0.010" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_THJ2" type="revolute">
+    <parent link="lh_thhub" />
+    <child link="lh_thmiddle" />
+    <origin rpy="0 0 0" xyz="0 0 0" />
+    <axis xyz="1 0 0" />
+    <limit effort="2.0" lower="-0.6981317007977318" upper="0.6981317007977318" velocity="2.0" />
+    <dynamics damping="0.1" />
+  </joint>
+  <gazebo reference="lh_THJ2">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <transmission name="lh_thmiddle_transmission">
+    <type>sr_mechanism_model/SimpleTransmission</type>
+    <actuator name="lh_THJ2">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_THJ2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  <gazebo reference="lh_thmiddle">
+  </gazebo>
+  
+  <link name="lh_thdistal">
+    <inertial>
+      <mass value="0.016" />
+      <origin rpy="0 0 0" xyz="0 0 0.01375" />
+      <inertia ixx="0.0000021" ixy="0.0" ixz="0.0" iyy="0.0000022" iyz="0.0" izz="0.000001" />
+    </inertial>
+    <visual>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0" />
+      <geometry name="lh_thdistal_visual">
+        <mesh filename="package://sr_description/meshes/components/th_distal/pst/th_distal_pst.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+      <material name="shadow_thmiddle_material">
+        <color rgba="0.2 0.2 0.2 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0" />
+      <geometry name="lh_thmiddle_collision_geom">
+        <mesh filename="package://sr_description/meshes/components/th_distal/pst/th_distal_pst.dae" scale="0.001 0.001 0.001" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="lh_THJ1" type="revolute">
+    <parent link="lh_thmiddle" />
+    <child link="lh_thdistal" />
+    <origin rpy="0 0 0" xyz="0 0 0.032" />
+    <axis xyz="1 0 0" />
+    <limit effort="1.0" lower="-0.2617993877991494" upper="1.5707963267948966" velocity="4.0" />
+    <dynamics damping="0.2" />
+  </joint>
+  <gazebo reference="lh_THJ1">
+    <provideFeedback>1</provideFeedback>
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <link name="lh_thtip">
+    <inertial>
+      <mass value="0.001" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+  </link>
+  <joint name="lh_thtip" type="fixed">
+    <parent link="lh_thdistal" />
+    <child link="lh_thtip" />
+    <origin rpy="0 0 0" xyz="0 0 0.0275" />
+  </joint>
+  <gazebo reference="lh_thdistal">
+    <sensor name="lh_thdistal_contact" type="contact">
+      <always_on>1</always_on>
+      <update_rate>1000.0</update_rate>
+      <contact>
+        <collision>lh_thdistal_collision</collision>
+        <topic>lh_thdistal_collision</topic>
+      </contact>
+      <plugin filename="libgazebo_ros_bumper.so" name="lh_thdistal_gazebo_ros_bumper_controller">
+        <alwaysOn>true</alwaysOn>
+        <frameName>lh_thdistal</frameName>
+        <updateRate>100.0</updateRate>
+        <bumperTopicName>contacts/lh_th/distal</bumperTopicName>
+      </plugin>
+    </sensor>
+    <mu1 value="500.0" />
+    <mu2 value="500.0" />
+    <kp value="10000000.0" />
+    <kd value="1.0" />
+    <selfCollide>true</selfCollide>
+  </gazebo>
+  <transmission name="lh_thdistal_transmission">
+    <type>sr_mechanism_model/SimpleTransmission</type>
+    <actuator name="lh_THJ1">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="lh_THJ1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
+  <joint name="left_hand_to_ur10e_base" type="fixed">
+    <origin rpy="0 0 3.14" xyz="0 0 0" />
+    <parent link="tool0" />
+    <child link="lh_forearm" />
+  </joint>
+</robot>

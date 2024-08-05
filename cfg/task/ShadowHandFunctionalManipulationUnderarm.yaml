@@ -1,0 +1,288 @@
+# used to create the object
+name: ShadowHandFunctionalManipulationUnderarm
+
+physics_engine: ${..physics_engine}
+
+defaults:
+  - env/observationSpecs: default
+  - env/actionSpecs: default
+
+# if given, will override the device setting in gym.
+env:
+  seed: ${resolve_default:0,${...seed}}
+  numEnvs: ${resolve_default:16384,${...num_envs}}
+  envSpacing: 0.75
+  episodeLength: 300
+  enableDebugVis: False
+  renderTarget: False
+  aggregateMode: 1
+
+  envMode: ${resolve_default:relposecontact,${...env_mode}} # orn: object orientation. relpose: relative pose. relposecontact: relative pose + finger pose
+  mode: ${resolve_default:train,${...mode}}
+  method: "ppo"
+
+  clipObservations: 5.0
+  clipActions: 1.0
+
+  stiffnessScale: 1.0
+  forceLimitScale: 1.0
+
+  useRelativeControl: True
+  dofSpeedScale: 20.0
+  actionsMovingAverage: 1.0
+  controlFrequencyInv: 1 # 60 Hz
+
+  startPositionNoise: 0.01
+  startRotationNoise: 0.0
+
+  resetPositionNoise: 0.01
+  resetRotationNoise: 0.0
+  resetObjOriNoise: 0.0
+  resetDofPosRandomInterval: 0.2
+  resetDofVelRandomInterval: 0.0
+
+  actionNoise: False
+  actionNoiseLevel: "step" # "step", "value"
+  actionNoiseRatio: 0.4
+  actionNoiseSigma: 0.1
+  actionNoiseMaxTimes: 0
+
+  # Random forces applied to the object
+  forceScale: 0.0
+  forceProbRange: [0.001, 0.1]
+  forceDecay: 0.99
+  forceDecayInterval: 0.08
+
+  # reward -> dictionary
+  rewardType: ${resolve_default:succrew+rotrew+actionpen+mutual+fjcontact,${...reward_type}}
+  # rewardType: "succrew+rotrew+actionpen+mutual+fjcontact+nominal"
+  relativePartReward: False
+  distRewardScale: -10.0
+  rotRewardScale: 1.0
+  tranRewardScale: 1.0
+  contactRewardScale: 1.0
+  partRewardScale: 0.3
+  heightRewardScale: 0.5
+  rotEps: 0.1
+  contactEps: 0.2
+  actionPenaltyScale: -0.0
+  wristActionPenaltyScale: -0.0
+  armActionPenaltyScale: -0.01
+  similarityRewardScale: 1.0
+  similarityRewardFreq: 1.0
+  reachGoalBonus: 800
+  heightScale: 0.0
+  timeStepPenatly: -0.0
+  manipulabilityPenaltyScale: 1.0
+  fallDistance: 0.24
+  fallPenalty: 0.0
+  curriculumMode: "no" # pose mode: set initial pose easy to reach; stage mode: set initial reward for pgm; set to no for evaluation
+
+  observationType: "full_state" # can be "openai", "full_no_vel", "full", "full_state"
+
+  enableContactSensors: True
+  contactSensorThreshold: 0.005
+  contactSensorFingertipOnly: False
+  contactSensorFingertipFromAll: False
+
+  # dataset filter
+  datasetDir: "oakink_shadow_dataset_valid_force_noise_accept_1"
+  datasetMetainfoPath: "data/oakink_filtered_metainfo.csv"
+  datasetSkipcodePath: "data/oakink_skipcode.csv"
+  datasetPoseLevelSampling: True
+  datasetQueries:
+    split: ${resolve_default:null,${....split}} #"train"
+    cluster: ${resolve_default:null,${....cluster}} #10
+    code: ${resolve_default:null,${....code}} #"binoculars_16"
+
+  observationSpace:
+    ${resolve_default:[],${...obs_space}}
+    # - "shadow_hand_dof_velocity"
+    # - "shadow_hand_position"
+    # - "shadow_hand_orientation"
+    # - "fingertip_position"
+    # - "fingertip_orientation"
+    # - "fingertip_linear_velocity"
+    # - "fingertip_angular_velocity"
+    # - "object_position"
+    # - "object_orientation"
+    # - "object_linear_velocity"
+    # - "object_angular_velocity"
+    # - "object_target_orn"
+    # - "orientation_error"
+
+  observationSpaceExtra:
+    # - object_position
+    # - rendered_pointcloud
+
+  enableRenderedPointCloud: False
+  numRenderedPointCloudPoints: 1024
+  renderedPointCloudMultiplier: 8
+  renderedPointCloudSampleMethod: "farthest"
+  renderedPointCloudGaussianNoise: False
+  renderedPointCloudGaussianNoiseSigma: 0.004
+  renderedPointCloudGaussianNoiseRatio: 0.4
+
+  enableImaginedPointCloud: False
+  numImaginedPointCloudPoints: 512
+
+  numObjectPointCloudPoints: 512
+
+  pclObs: False
+  realPclObs: False
+  imgPclObs: False
+  tactileObs: False
+  stackFrameNumber: ${resolve_default:1,${...stack_frame_number}}
+  velocityObservationScale: 0.2
+  actionSpace:
+    ${resolve_default:[],${...action_space}}
+    # must follow following order: wrist_translation, wrist_rotation, hand_rotaion
+    # - "wrist_translation"
+    # - "wrist_rotation"
+    # - "hand_rotation"
+
+  numObjects: ${resolve_default:10000,${...num_objects}}
+  numObjectsPerEnv: ${resolve_default:5,${...num_objects_per_env}}
+  objectSpacing: 0.15
+  resampleObject: ${resolve_default:False,${...resample_object}}
+
+  asymmetric_observations: False
+  successTolerance: 0.1
+  printNumSuccesses: False
+  maxConsecutiveSuccesses: 0
+
+  # set to True if you use camera sensors in the environment
+  enableCameraSensors: False
+  visEnvNum: 0
+  visImageSize: 512
+
+logging:
+  envInfo: ${resolve_default:False,${...env_info}}
+
+task:
+  randomize: True
+  randomization_params:
+    # frequency: 720   # Define how many simulation steps between generating new randomizations
+    # observations:
+    #   range: [0, .002] # range for the white noise
+    #   range_correlated: [0, .001] # range for correlated noise, refreshed with freq `frequency`
+    #   operation: "additive"
+    #   distribution: "gaussian"
+    #   # schedule: "linear"   # "constant" is to turn on noise after `schedule_steps` num steps
+    #   # schedule_steps: 40000
+    # actions:
+    #   range: [0., .05]
+    #   range_correlated: [0, .015] # range for correlated noise, refreshed with freq `frequency`
+    #   operation: "additive"
+    #   distribution: "gaussian"
+    #   # schedule: "linear"  # "linear" will linearly interpolate between no rand and max rand
+    #   # schedule_steps: 40000
+    # sim_params:
+    #   gravity:
+    #     range: [1.0, 1.0]
+    #     operation: "scaling"
+    #     distribution: "uniform"
+    # schedule: "linear"  # "linear" will linearly interpolate between no rand and max rand
+    #     # schedule_steps: 40000
+    actor_params:
+      # shadow_hand:
+      #   color: True
+      #   tendon_properties:
+      #     damping:
+      #       range: [0.3, 3.0]
+      #       operation: "scaling"
+      #       distribution: "loguniform"
+      #       # schedule: "linear"  # "linear" will scale the current random sample by `min(current num steps, schedule_steps) / schedule_steps`
+      #       # schedule_steps: 30000
+      #     stiffness:
+      #       range: [0.75, 1.5]
+      #       operation: "scaling"
+      #       distribution: "loguniform"
+      #       # schedule: "linear"  # "linear" will scale the current random sample by `min(current num steps, schedule_steps) / schedule_steps`
+      #       # schedule_steps: 30000
+      #   dof_properties:
+      #     damping:
+      #       range: [0.3, 3.0]
+      #       operation: "scaling"
+      #       distribution: "loguniform"
+      #       # schedule: "linear"  # "linear" will scale the current random sample by `min(current num steps, schedule_steps) / schedule_steps`
+      #       # schedule_steps: 30000
+      #     stiffness:
+      #       range: [0.75, 1.5]
+      #       operation: "scaling"
+      #       distribution: "loguniform"
+      #       # schedule: "linear"  # "linear" will scale the current random sample by `min(current num steps, schedule_steps) / schedule_steps`
+      #       # schedule_steps: 30000
+      #     lower:
+      #       range: [0, 0.01]
+      #       operation: "additive"
+      #       distribution: "gaussian"
+      #       # schedule: "linear"  # "linear" will scale the current random sample by `min(current num steps, schedule_steps) / schedule_steps`
+      #       # schedule_steps: 30000
+      #     upper:
+      #       range: [0, 0.01]
+      #       operation: "additive"
+      #       distribution: "gaussian"
+      #       # schedule: "linear"  # "linear" will scale the current random sample by `min(current num steps, schedule_steps) / schedule_steps`
+      #       # schedule_steps: 30000
+      #   rigid_body_properties:
+      #     mass:
+      #       range: [0.5, 1.5]
+      #       operation: "scaling"
+      #       distribution: "uniform"
+      #       setup_only: True # Property will only be randomized once before simulation is started. See Domain Randomization Documentation for more info.
+      #       # schedule: "linear"  # "linear" will scale the current random sample by `min(current num steps, schedule_steps) / schedule_steps`
+      #       # schedule_steps: 30000
+      #   rigid_shape_properties:
+      #     friction:
+      #       num_buckets: 250
+      #       range: [0.7, 1.3]
+      #       operation: "scaling"
+      #       distribution: "uniform"
+      #       # schedule: "linear"  # "linear" will scale the current random sample by `min(current num steps, schedule_steps) / schedule_steps`
+      #       # schedule_steps: 30000
+      object_0:
+        # scale:
+        #   range: [0.95, 1.05]
+        #   operation: "scaling"
+        #   distribution: "uniform"
+        #   setup_only: True # Property will only be randomized once before simulation is started. See Domain Randomization Documentation for more info.
+        #   # schedule: "linear"  # "linear" will scale the current random sample by ``min(current num steps, schedule_steps) / schedule_steps`
+        #   # schedule_steps: 30000
+        rigid_body_properties:
+          mass:
+            range: [0.01, 0.5]
+            operation: "scaling"
+            distribution: "uniform"
+            setup_only: True # Property will only be randomized once before simulation is started. See Domain Randomization Documentation for more info.
+            # schedule: "linear"  # "linear" will scale the current random sample by ``min(current num steps, schedule_steps) / schedule_steps`
+            # schedule_steps: 30000
+      #   rigid_shape_properties:
+      #     friction:
+      #       num_buckets: 250
+      #       range: [0.7, 1.3]
+      #       operation: "scaling"
+      #       distribution: "uniform"
+      #       # schedule: "linear"  # "linear" will scale the current random sample by `min(current num steps, schedule_steps) / schedule_steps`
+      #       # schedule_steps: 30000
+
+sim:
+  dt: 0.033333 # 1/60
+  substeps: 2
+  up_axis: "z"
+  use_gpu_pipeline: ${eq:${...pipeline},"gpu"}
+  gravity: [0.0, 0.0, -9.81]
+  physx:
+    num_threads: ${....num_threads}
+    solver_type: ${....solver_type}
+    use_gpu: ${contains:"cuda",${....sim_device}} # set to False to run on CPU
+    num_position_iterations: 8
+    num_velocity_iterations: 0
+    max_gpu_contact_pairs: 8388608 # 8*1024*1024
+    num_subscenes: ${....num_subscenes}
+    contact_offset: 0.002
+    rest_offset: 0.0
+    bounce_threshold_velocity: 0.2
+    max_depenetration_velocity: 1000.0
+    default_buffer_size_multiplier: 5.0
+    contact_collection: 1 # 0: CC_NEVER (don't collect contact info), 1: CC_LAST_SUBSTEP (collect only contacts on last substep), 2: CC_ALL_SUBSTEPS (broken - do not use!)

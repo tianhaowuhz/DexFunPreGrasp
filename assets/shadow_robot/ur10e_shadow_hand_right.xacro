@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="ur10e_robot">
+  <!--
+    This is a convenience top-level xacro which loads the macro for the UR10e
+    which defines the default values for the various "parameters files"
+    parameters for a UR10e.
+
+    This file is only useful when loading a stand-alone, completely isolated
+    robot with only default values for all parameters such as the kinematics,
+    visual and physical parameters and joint limits.
+
+    This file is not intended to be integrated into a larger scene or other
+    composite xacro.
+
+    Instead, xacro:include 'inc/ur10e_macro.xacro' and override the defaults
+    for the arguments to that macro.
+
+    Refer to 'inc/ur_macro.xacro' for more information.
+  -->
+
+  <!-- Load the macro for the UR10e -->
+  <xacro:include filename="$(find ur_description)/urdf/inc/ur10e_macro.xacro"/>
+  <xacro:ur10e_robot prefix="" />
+
+  <!-- Load the macro for the Shadow Hand -->
+  <xacro:arg name="hand_type" default="hand_e"/>
+  <xacro:arg name="hand_version" default="E3M5"/>
+  <xacro:arg name="fingers" default="all"/>
+  <xacro:arg name="tip_sensors" default="pst"/>
+  <xacro:arg name="mid_sensors" default="none"/>
+  <xacro:arg name="prox_sensors" default="none"/>
+  <xacro:arg name="palm_sensor" default="none"/>
+  <xacro:arg name="mounting_plate" default="true"/>
+  
+  <xacro:include filename="$(find sr_description)/other/xacro/materials.urdf.xacro"/>
+  <xacro:include filename="$(find sr_description)/hand/xacro/hand.urdf.xacro"/>
+  <xacro:include filename="$(find sr_description)/other/xacro/gazebo.urdf.xacro"/>
+
+  <xacro:sr_hand side="right" hand_type="$(arg hand_type)" hand_version="$(arg hand_version)" 
+                 fingers="$(arg fingers)" tip_sensors="$(arg tip_sensors)" mid_sensors="$(arg mid_sensors)" 
+                 prox_sensors="$(arg prox_sensors)" palm_sensor="$(arg palm_sensor)" mounting_plate="$(arg mounting_plate)"/>
+
+  <!-- Define the UR10e base link as the parent of the Shadow Hand -->  
+  <joint name="right_hand_to_ur10e_base" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 3.14"/>
+    <parent link="tool0"/>
+    <child link="rh_forearm"/>
+  </joint>
+</robot>

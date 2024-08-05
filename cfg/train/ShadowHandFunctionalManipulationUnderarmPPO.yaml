@@ -1,0 +1,54 @@
+seed: -1
+
+clip_observations: 5.0
+clip_actions: 1.0
+
+setting:
+  action_type: 'direct'
+  sub_action_type: 'direct'
+  action_clip: False #
+  grad_process: 'norm'
+policy: # only works for MlpPolicy right now
+  norm_action: False
+  action_scale: 1.0
+  distengle: False
+  pointnet_version: 'pt'
+  hand_pcl: False
+  pretrain_pointnet: False
+  shared_pointnet: True
+  finetune_pointnet: True
+  points_per_object: 1024
+  hand_joint_dim: 18
+  hand_wrist_dim: 7
+  hand_state_dim: 25
+  pi_state_encoder_hid_sizes: [512,256] #[1024, 1024, 512]
+  vf_state_encoder_hid_sizes: [512,256] #[1024, 1024, 512]
+  pcl_feature_dim: 64
+  activation: elu # can be elu, relu, selu, crelu, lrelu, tanh, sigmoid
+learn:
+  agent_name: shadow_hand
+  test: False
+  resume: 0
+  save_interval: 1000 # check for potential saves every this many iterations
+  print_log: True
+  sampler: random
+
+  # rollout params
+  max_iterations: 40000
+
+  # training params
+  cliprange: 0.2
+  ent_coef: 0
+  nsteps: 12
+  noptepochs: 2 #2 5
+  nminibatches: 4 #8 4 # this is per agent
+  max_grad_norm: 1
+  optim_stepsize: 3.e-4 # 3e-4 is default for single agent training with constant schedule
+  schedule: adaptive # could be adaptive or linear or fixed
+  desired_kl: 0.016 #0.008 0.016
+  gamma: 0.99 #0.99 0.96
+  lam: 0.95
+  init_noise_std: 0.8
+
+  log_interval: 1
+  asymmetric: False

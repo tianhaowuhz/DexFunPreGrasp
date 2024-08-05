@@ -1,0 +1,87 @@
+seed: -1
+
+clip_observations: 5.0
+clip_actions: 1.0
+
+setting:
+  action_type: "direct"
+  sub_action_type: "direct"
+  action_clip: False #
+  grad_process: "norm"
+policy:
+  observation_space:
+    - ur_endeffector_position
+    - ur_endeffector_orientation
+    - shadow_hand_dof_position
+    - object_position_wrt_palm
+    - object_orientation_wrt_palm
+    - object_target_relposecontact
+    # - tactile
+    # - object_pointcloud
+    # - imagined_pointcloud
+
+  scheduler:
+    num_train_timesteps: 10
+    beta_start: 0.0001
+    beta_end: 0.02
+    beta_schedule: squaredcos_cap_v2
+
+    clip_sample: true
+    prediction_type: epsilon
+    variance_type: fixed_small
+
+  optimizer:
+    transformer_weight_decay: 0.001
+    obs_encoder_weight_decay: 1.e-6
+    learning_rate: 0.0001
+    betas: [0.9, 0.95]
+
+  lr_scheduler:
+    name: "cosine"
+    num_warmup_steps: 1000
+
+  network:
+    horizon: 4
+    n_action_steps: 1
+    n_obs_steps: 2
+    num_inference_steps: 10
+    n_layer: 8
+    n_cond_layers: 0
+    n_head: 4
+    p_drop_emb: 0.0
+    p_drop_attn: 0.3
+    causal_attn: true
+    time_as_cond: true
+    obs_as_cond: true
+    pred_action_steps_only: false
+    action_type: all
+    encode_state_type: arm+dof+obj2palmpose+target
+    space: euler
+    action_dim: 26
+    arm_action_dim: 6
+    obs_state_dim: 222
+    obs_tactile_dim: 14
+    pcl_number: 1024
+    hidden_dim: 1024
+    embed_dim: 512
+
+  ema:
+    update_after_step: 0
+    inv_gamma: 1.0
+    power: 0.75
+    min_value: 0.0
+    max_value: 0.9999
+
+learn:
+  num_epochs: 501
+
+  dataset:
+    _target_: src.utils.data.MemmapTrajectoriesDataset
+    data_dir: "data/expert_dataset_pose_level/memmap"
+    horizon: ${train.policy.network.horizon}
+
+  dataloader:
+    _target_: torch.utils.data.DataLoader
+    batch_size: 256
+    shuffle: true
+    num_workers: 4

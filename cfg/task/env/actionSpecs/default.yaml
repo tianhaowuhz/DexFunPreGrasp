@@ -1,0 +1,26 @@
+__dim__:
+  num_ur_actuated_dofs: 6
+  num_shadow_actuated_dofs: 20
+
+# endeffector_translation:
+wrist_translation:
+  shape: 3
+  attr: eef_translation
+
+endeffector_rotation_quaternion:
+  shape: 4
+  attr: eef_rotation
+
+# endeffector_rotation_euler:
+wrist_rotation:
+  shape: 3
+  attr: eef_rotation
+
+ur_dof_speeds:
+  shape: num_ur_actuated_dofs
+  attr: ur_dof_speeds
+
+# shadow_dof_speeds:
+hand_rotation:
+  shape: num_shadow_actuated_dofs
+  attr: shadow_dof_speeds
