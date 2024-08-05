@@ -6,7 +6,7 @@
 <!-- [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Ftianhaowuhz%2Fhuman-assisting-dex-grasp%2F&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com) -->
 
 
-This repo is the official implementation of [Dexterous Functional Pre-Grasp Manipulation with Diffusion Policy](https://arxiv.org/pdf/2403.12421).
+This repo is the official implementation of [Dexterous Functional Pre-Grasp Manipulation with Diffusion Policy](https://arxiv.org/pdf/2403.12421). **Please note this is an early version of the release, we will refine and release a new version in the future**.
 
 ## TODOs (Under Development):
 - [ ] Point Cloud Pretraining
@@ -83,7 +83,7 @@ You can download object mesh from [DexFunPreGrasp/assets](https://drive.google.c
 assets
 ```
 ### Functional Grasp Pose Dataset
-You can download filterd grasping dataset, human trajectories, and pointcloud buffer from [DexFunPreGrasp/pose_datasets](https://drive.google.com/drive/folders/1gKqdrIu9GEYuV4FdRFeFCroRQ9OxL5MI?usp=sharing), put on following directory and extract.
+You can download retargeted functional grasping dataset from [DexFunPreGrasp/pose_datasets](https://drive.google.com/drive/folders/1gKqdrIu9GEYuV4FdRFeFCroRQ9OxL5MI?usp=sharing), put on following directory and extract.
 ```
 data
 ```
